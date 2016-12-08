@@ -142,7 +142,7 @@ module Psych
         if target.respond_to?(:to_yaml)
           begin
             loc = target.method(:to_yaml).source_location.first
-            if loc !~ /(syck\/rubytypes.rb|psych\/core_ext.rb)/
+            if loc !~ /psych\/core_ext.rb/
               unless target.respond_to?(:encode_with)
                 if $VERBOSE
                   warn "implementing to_yaml is deprecated, please implement \"encode_with\""
@@ -315,8 +315,7 @@ module Psych
 
         if binary?(o)
           o     = [o].pack('m0')
-          tag   = '!binary' # FIXME: change to below when syck is removed
-          #tag   = 'tag:yaml.org,2002:binary'
+          tag   = 'tag:yaml.org,2002:binary'
           style = Nodes::Scalar::LITERAL
           plain = false
           quote = false
