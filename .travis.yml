@@ -15,3 +15,5 @@ addons:
   apt:
     packages:
       - haveged
+
+script: bundle exec rake test
