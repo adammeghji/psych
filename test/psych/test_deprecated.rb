@@ -17,7 +17,7 @@ module Psych
         @value = 'Friday!'
       end
 
-      def to_yaml opts = {}
+      def quick_emit opts = {}
         Psych.quick_emit object_id, opts do |out|
           out.map taguri, to_yaml_style do |map|
             map.add 'name', @name
@@ -33,7 +33,7 @@ module Psych
     end
 
     def test_quick_emit
-      qe2 = Psych.load @qe.to_yaml
+      qe2 = Psych.load @qe.quick_emit
       assert_equal @qe.name, qe2.name
       assert_instance_of QuickEmitter, qe2
       assert_nil qe2.value
@@ -45,8 +45,8 @@ module Psych
       qe    = hash2[:qe]
 
       assert_equal @qe.name, qe.name
+      assert_equal @qe.value, qe.value
       assert_instance_of QuickEmitter, qe
-      assert_nil qe.value
     end
 
     class QuickEmitterEncodeWith
@@ -149,7 +149,7 @@ module Psych
 
     class YamlAs
       TestCase.suppress_warning do
-        psych_yaml_as 'helloworld' # this should be yaml_as but to avoid syck
+        yaml_as 'helloworld' # this should be yaml_as but to avoid syck
       end
     end
 

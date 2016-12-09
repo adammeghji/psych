@@ -19,7 +19,7 @@ module Psych
       target.to_yaml_style = coder.style
       block.call coder
     end
-    target.psych_to_yaml unless opts[:nodump]
+    target.to_yaml unless opts[:nodump]
   end
 
   # This method is deprecated, use Psych.load_stream instead.

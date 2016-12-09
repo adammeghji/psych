@@ -50,10 +50,10 @@ module Psych
     def assert_to_yaml( obj, yaml )
       assert_equal( obj, Psych::load( yaml ) )
       assert_equal( obj, Psych::parse( yaml ).transform )
-      assert_equal( obj, Psych::load( obj.psych_to_yaml ) )
-      assert_equal( obj, Psych::parse( obj.psych_to_yaml ).transform )
+      assert_equal( obj, Psych::load( obj.to_yaml ) )
+      assert_equal( obj, Psych::parse( obj.to_yaml ).transform )
       assert_equal( obj, Psych::load(
-        obj.psych_to_yaml(
+        obj.to_yaml(
           :UseVersion => true, :UseHeader => true, :SortKeys => true
         )
       ))
@@ -72,7 +72,7 @@ module Psych
       v << obj
       assert_equal(obj, Psych.load(v.tree.yaml))
       assert_equal( obj, Psych::load(Psych.dump(obj)))
-      assert_equal( obj, Psych::load( obj.psych_to_yaml ) )
+      assert_equal( obj, Psych::load( obj.to_yaml ) )
     end
 
     #
